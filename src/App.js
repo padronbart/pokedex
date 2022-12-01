@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  function pickRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
   function handleIndex(){
      const next = Math.min(indx + 3, 949);
      setIndx(next);
@@ -21,9 +18,7 @@ function App() {
   });
   useEffect(() => {
     const request = `https://pokeapi.co/api/v2/pokemon/${indx}`;
-        fetch(request, {
-            cache: "force-cache"
-        })
+        fetch(request)
             .then(response => response.json())
             .then(data => {
                 setPokemon(pokemon => {
@@ -42,9 +37,6 @@ function App() {
                   return{
                     ...pokemon,
                     speciesData: data,
-                    description: pickRandom(
-                        data.flavor_text_entries.filter(e => e.language.name === "en").map(e => e.flavor_text)
-                    ),
                     loading: false
                   }
                 });
