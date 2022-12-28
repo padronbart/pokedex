@@ -93,6 +93,88 @@ function App() {
     </div>
     <button onClick={handleIndex}>+</button>
     <button>-</button>
+  
+    <div className="logo">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
+        height="100%"
+        alt="logo"
+      />
+    </div>
+
+    <div id="pokedex">
+      <div id="left-panel">
+        <div className="left-top-container">
+          <div className="lights-container">
+            <div className="big-light-boarder">
+              <div className="big-light blue">
+                <div className="big-dot light-blue"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="screen-container">
+          <div className="screen">
+            <div className="top-screen-lights">
+              <div className="mini-light red"></div>
+              <div className="mini-light red"></div>
+            </div>
+            <div id="main-screen">
+              <img src={pokemon.evoSprites[0]}/>
+            </div>
+            <div className="bottom-screen-lights">
+              <div className="small-light red">
+                <div className="dot light-red"></div>
+              </div>
+              <div className="burger">
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="buttons-container">
+          <div className="upper-buttons-container">
+            <div class="big-button"></div>
+            <div className="long-buttons-container">
+              <div className="long-button red"></div>
+              <div className="long-button light-blue"></div>
+            </div>
+          </div>
+          <div className="nav-buttons-container">
+            <div className="dots-container">
+              <div>.</div>
+              <div>.</div>
+            </div>
+            <div className="green-screen">
+              <span id="name-screen">bulbasaur</span>
+            </div>
+            <div className="right-nav-container">
+              <div className="nav-button">
+                <div className="nav-center-circle"></div>
+                <div className="nav-button-vertical"></div>
+                <div className="nav-button-horizontal">
+                  <div className="border-top"></div>
+                  <div className="border-bottom"></div>
+                </div>
+              </div>
+              <div className="bottom-right-nav-container">
+                <div className="small-light red">
+                  <div className="dot light-red"></div>
+                </div>
+                <div className="dots-container">
+                  <div className="black-dot">.</div>
+                  <div className="black-dot">.</div>
+                  <div className="black-dot">.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     </>
   );
 }
