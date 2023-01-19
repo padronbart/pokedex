@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  function handleIndex(){
-     const next = Math.min(indx + 3, 949);
+  function handleIndexNext(){
+    if(indx === 949) return;
+     const next = indx + 3;
      setIndx(next);
   }
+  function handleIndexPrev(){
+    if(indx === 0) return;
+    const next = indx - 3;
+    setIndx(next);
+ }
   const [indx, setIndx] = useState(1);
+  const [inputValue, setInputValue] = useState('');
+
   const [pokemon, setPokemon] = useState({
     pokemonIndex: indx,
     pokemonData: {},
@@ -79,21 +87,61 @@ function App() {
                     });
             });
   }, [indx])
+
+
+  async function handleSubmit() {
+    const response = await fetch('http://localhost:9001/myPokemons',{
+      method: 'POST',
+      body: JSON.stringify({id: inputValue}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+  async function handleDelete() {
+    const user = {
+      id : inputValue,
+      pokemon: pokemon.evoNames[0]
+    }
+    const response = await fetch('http://localhost:9001/delete',{
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+  function handleChange(event) {
+    setInputValue(event.target.value);
+  }
+  async function handleQuery(){
+    const user = {
+      id : inputValue,
+      pokemon: pokemon.evoNames[0]
+    }
+    fetch('http://localhost:9001', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Do something with the response data
+        console.log(data);
+      });
+  }
   return (
     <>
     <div className="App">
       <header className="App-header">
-        {
-          pokemon.evoSprites.map(img => (
-            <img src={img}/>
-          ))
-        }
-          
       </header>
     </div>
-    <button onClick={handleIndex}>+</button>
-    <button>-</button>
-  
     <div className="logo">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
@@ -111,6 +159,10 @@ function App() {
                 <div className="big-dot light-blue"></div>
               </div>
             </div>
+            <div className="input-screen">
+              <input  id="password" type="password" value={inputValue} onChange={handleChange} />
+            </div>
+            
           </div>
         </div>
         <div className="screen-container">
@@ -120,7 +172,7 @@ function App() {
               <div className="mini-light red"></div>
             </div>
             <div id="main-screen">
-              <img src={pokemon.evoSprites[0]}/>
+              <img className="poke" src={pokemon.evoSprites[0]}/>
             </div>
             <div className="bottom-screen-lights">
               <div className="small-light red">
@@ -137,10 +189,9 @@ function App() {
         </div>
         <div className="buttons-container">
           <div className="upper-buttons-container">
-            <div class="big-button"></div>
+            <div className="big-button" onClick={handleIndexNext}> + </div>
             <div className="long-buttons-container">
-              <div className="long-button red"></div>
-              <div className="long-button light-blue"></div>
+              <div className="big-button" onClick={handleIndexPrev}> - </div>
             </div>
           </div>
           <div className="nav-buttons-container">
@@ -149,7 +200,7 @@ function App() {
               <div>.</div>
             </div>
             <div className="green-screen">
-              <span id="name-screen">bulbasaur</span>
+              <span id="name-screen">{pokemon.evoNames[0]}</span>
             </div>
             <div className="right-nav-container">
               <div className="nav-button">
@@ -174,7 +225,12 @@ function App() {
           </div>
         </div>
       </div>
+      
       </div>
+      
+      <button onClick={handleSubmit} className="">Your pokemons</button>
+      <button onClick={handleQuery}>Save pokemon</button>
+      <button onClick={handleDelete}>Free pokemon</button>
     </>
   );
 }
