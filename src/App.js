@@ -90,7 +90,7 @@ function App() {
 
 
   async function handleSubmit() {
-    const response = await fetch('http://localhost:9001/myPokemons',{
+    const response = await fetch('https://nodevercel-beta.vercel.app/myPokemons',{
       method: 'POST',
       body: JSON.stringify({id: inputValue}),
       headers: {
@@ -105,7 +105,7 @@ function App() {
       id : inputValue,
       pokemon: pokemon.evoNames[0]
     }
-    const response = await fetch('http://localhost:9001/delete',{
+    const response = await fetch('https://nodevercel-beta.vercel.app/delete',{
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -123,7 +123,7 @@ function App() {
       id : inputValue,
       pokemon: pokemon.evoNames[0]
     }
-    fetch('http://localhost:9001', {
+    fetch('https://nodevercel-beta.vercel.app', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
