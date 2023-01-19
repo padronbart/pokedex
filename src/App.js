@@ -123,7 +123,7 @@ function App() {
       id : inputValue,
       pokemon: pokemon.evoNames[0]
     }
-    fetch('https://nodevercel-beta.vercel.app', {
+    fetch('https://nodevercel-beta.vercel.app/create', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
