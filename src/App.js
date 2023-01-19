@@ -127,7 +127,8 @@ function App() {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://pokedex-xi-nine.vercel.app',
+        'Content-Type': 'application/json'
       },
     })
       .then((response) => response.json())
